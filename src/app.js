@@ -18,9 +18,9 @@ app.get("/", (req, res) => {
   res.send("Hello, chào các bạn: ");
 });
 
-app.use("/posts", postRouter);
-app.use("/users", userRouter);
-app.use("/products", productsRouter);
+app.use("/api/posts", postRouter);
+app.use("/api/users", userRouter);
+app.use("/api/products", productsRouter);
 
 
 // Khởi động server
