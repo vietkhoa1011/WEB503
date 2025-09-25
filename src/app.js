@@ -1,21 +1,29 @@
 import express from "express";
-import dotenv from "dotenv";
-import postRouter from "./routers/post.js";
-import productsRouter from './routers/products .js';
-import userRouter from './routers/user.js';
-import sumRouter from "./routers/sum.js";
-import greetRouter from "./routers/greet.js";
+import morgan from "morgan";
+import postRouter from "./routers/posts.js";
+import userRouter from "./routers/user.js";
+import productsRouter from "./routers/product.js";  
 
-    dotenv.config();
-    const app = express();
-    const port = process.env.PORT || 3000;
+const app = express();
 
-app.use("/api/post", postRouter);
-app.use('/api/products', productsRouter);
-app.use('/api/user', userRouter);
-app.use("/api/sum", sumRouter);
-app.use("/api/greet", greetRouter);
+// Middleware log request
+app.use(morgan("dev"));
 
-app.listen(port, () => {
-    console.log(`Server is running on port http://localhost:${port}`);
+// Middleware parse JSON body
+app.use(express.json());
+
+// Dùng router
+
+app.get("/", (req, res) => {
+  res.send("Hello, chào các bạn: ");
+});
+
+app.use("/posts", postRouter);
+app.use("/users", userRouter);
+app.use("/products", productsRouter);
+
+
+// Khởi động server
+app.listen(3000, () => {
+  console.log("🚀 Server is running at http://localhost:3000");
 });
