@@ -3,6 +3,7 @@ import morgan from "morgan";
 import postRouter from "./routers/posts.js";
 import userRouter from "./routers/user.js";
 import productsRouter from "./routers/product.js";  
+import mongoose from "mongoose";
 
 const app = express();
 
@@ -10,7 +11,11 @@ const app = express();
 app.use(morgan("dev"));
 
 // Middleware parse JSON body
-app.use(express.json());
+
+  app.use(express.json());
+  mongoose.connect(`mongodb://127.0.0.1:27017/web503_nodejs`)
+    .then(() => console.log('Connected to MongoDB'))
+    .catch(err => console.error('Could not connect to MongoDB:', err));
 
 // Dùng router
 
